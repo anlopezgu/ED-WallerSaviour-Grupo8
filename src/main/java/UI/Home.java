@@ -482,7 +482,7 @@ public class Home extends javax.swing.JFrame {
             jLabel1.setText("SALDO"+"   "+"$"+(IngresosInt+EgresosInt));
         }else{
             Cobro = Cobro+Integer.parseInt(jTextField1.getText());
-            jLabel3.setText("COBRO"+"   "+"$"+(Cobro));
+            jLabel3.setText("COBRO"+"   "+"$"+(Cobro) );
         }
         
 
