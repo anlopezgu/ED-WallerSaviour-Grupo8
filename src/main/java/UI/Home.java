@@ -33,6 +33,8 @@ public class Home extends javax.swing.JFrame {
     MinHeap Movimientos = new MinHeap(100);
     Pila Ingresos = new Pila();
     Fila Egresos =new Fila();
+    Pila Ingresos2 = new Pila();
+    Fila Egresos2 =new Fila();
     
 
     
@@ -155,7 +157,6 @@ public class Home extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jCalendar1 = new com.toedter.calendar.JCalendar();
-        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,16 +165,16 @@ public class Home extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Decker", 0, 18)); // NOI18N
         jLabel3.setText("Cobro ");
-        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 144, 23));
+        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, 23));
 
         jLabel1.setFont(new java.awt.Font("Decker", 0, 18)); // NOI18N
         jLabel1.setText("Saldo");
         jLabel1.setToolTipText("");
-        panel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 144, 23));
+        panel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 220, 23));
 
         jLabel2.setFont(new java.awt.Font("Decker", 0, 18)); // NOI18N
         jLabel2.setText("Deuda");
-        panel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 144, 23));
+        panel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, 23));
 
         getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 320));
 
@@ -282,7 +283,7 @@ public class Home extends javax.swing.JFrame {
         });
         panel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 175, 20));
 
-        jButton1.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
         jButton1.setText("Metas");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,20 +293,7 @@ public class Home extends javax.swing.JFrame {
         panel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, -1, -1));
 
         jCalendar1.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
-        panel3.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
-        );
-
-        panel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 210, 130));
+        panel3.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         getContentPane().add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 760, 640));
 
@@ -318,28 +306,28 @@ public class Home extends javax.swing.JFrame {
         if (periot=="Semana" ){
             XYSeries oSeries = new XYSeries("Saldo");
             
-            int ingreso7 = Integer.parseInt(Ingresos.Pop().getAmount());
-            int ingreso6 = Integer.parseInt(Ingresos.Pop().getAmount());
-            int ingreso5 = Integer.parseInt(Ingresos.Pop().getAmount());
-            int ingreso4 = Integer.parseInt(Ingresos.Pop().getAmount());
-            int ingreso3 = Integer.parseInt(Ingresos.Pop().getAmount());
-            int ingreso2 = Integer.parseInt(Ingresos.Pop().getAmount());
-            int ingreso1 = Integer.parseInt(Ingresos.Pop().getAmount());
+            int ingreso7 = Integer.parseInt(Ingresos2.Pop().getAmount());
+            int ingreso6 = Integer.parseInt(Ingresos2.Pop().getAmount());
+            int ingreso5 = Integer.parseInt(Ingresos2.Pop().getAmount());
+            int ingreso4 = Integer.parseInt(Ingresos2.Pop().getAmount());
+            int ingreso3 = Integer.parseInt(Ingresos2.Pop().getAmount());
+            int ingreso2 = Integer.parseInt(Ingresos2.Pop().getAmount());
+            int ingreso1 = Integer.parseInt(Ingresos2.Pop().getAmount());
             
-            int egreso1 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
-            int egreso2 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
-            int egreso3 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
-            int egreso4 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
-            int egreso5 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
-            int egreso6 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
-            int egreso7 = Integer.parseInt(Egresos.Peek().getAmount());
-            Egresos.Dequeue();
+            int egreso1 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
+            int egreso2 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
+            int egreso3 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
+            int egreso4 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
+            int egreso5 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
+            int egreso6 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
+            int egreso7 = Integer.parseInt(Egresos2.Peek().getAmount());
+            Egresos2.Dequeue();
            
             int day1 = ingreso1-egreso1;
             int day2 = ingreso2-egreso2;
@@ -363,9 +351,9 @@ public class Home extends javax.swing.JFrame {
             JFreeChart oChart = ChartFactory.createXYLineChart("Resumen de la Semana", "Dia", "Cantidad", oDataset,PlotOrientation.VERTICAL,true,false,false);
             
             ChartPanel oPanel = new ChartPanel(oChart);
-            jPanel2.setLayout(new java.awt.BorderLayout());
-            jPanel2.add(oPanel);
-            jPanel2.validate();
+            jPanel1.setLayout(new java.awt.BorderLayout());
+            jPanel1.add(oPanel);
+            jPanel1.validate();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     private  void inicio() {
@@ -399,9 +387,11 @@ public class Home extends javax.swing.JFrame {
             
             if (Integer.parseInt(NodoX.getAmount()) > 0) {
                 Ingresos.Push(NodoX);
+                Ingresos2.Push(NodoX);
                 
             } else {
                 Egresos.Enqueue(NodoX);
+                Egresos2.Enqueue(NodoX);
                 
             }
             String dateNodoMin2 = Movimientos.peekMin().getFecha();
@@ -466,7 +456,7 @@ public class Home extends javax.swing.JFrame {
             jLabel1.setText("SALDO" + "   " + "$" + (IngresosInt + EgresosInt));
         } else {
             Deuda = Deuda + Integer.parseInt("-"+jTextField1.getText());
-            jLabel2.setText("Deuda" + "   " + "$" + (Deuda));
+            jLabel2.setText("DEUDA" + "   " + "$" + (Deuda));
         }
         String uuid = java.util.UUID.randomUUID().toString();
         ConexionBD.insertarDatos("movimientos",uuid,NewIn);
@@ -492,7 +482,7 @@ public class Home extends javax.swing.JFrame {
             jLabel1.setText("SALDO"+"   "+"$"+(IngresosInt+EgresosInt));
         }else{
             Cobro = Cobro+Integer.parseInt(jTextField1.getText());
-            jLabel3.setText("Cobro"+"   "+"$"+(Cobro));
+            jLabel3.setText("COBRO"+"   "+"$"+(Cobro));
         }
         
 
@@ -551,7 +541,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
