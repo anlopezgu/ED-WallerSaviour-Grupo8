@@ -10,12 +10,12 @@ package Data;
  * @author ANDRES
  */
 public class NodoMeta {
-    int amount;
+    String amount;
     String name;
     NodoMeta previous = null;
     NodoMeta next = null;
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
     
@@ -32,7 +32,7 @@ public class NodoMeta {
     }
     
 
-    public NodoMeta(int amount,String name) {
+    public NodoMeta(String amount,String name) {
         this.amount=amount;
         this.name = name;
     }

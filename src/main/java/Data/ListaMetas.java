@@ -90,7 +90,7 @@ public class ListaMetas{
   }
 
 
-  public Boolean Find(int find){
+  public Boolean Find(String find){
     NodoMeta Findkey = head;
     Boolean answer;
     while (Findkey.next != null){
@@ -111,7 +111,7 @@ public class ListaMetas{
   return answer;
   }
 
-  public void Erase(int erase){
+  public void Erase(String erase){
     NodoMeta Erasekey = head;
     while (Erasekey.next != null){
       if(Erasekey.amount== erase){
@@ -128,7 +128,7 @@ public class ListaMetas{
     }
   }
 
-  public void AddBefore(NodoMeta Nodo,int x){
+  public void AddBefore(NodoMeta Nodo,String x){
     NodoMeta FindNodo =head;
     NodoMeta FindPrevious;
     Boolean match=false;
@@ -174,7 +174,7 @@ public class ListaMetas{
 
 
 
-public void AddAfter(NodoMeta Nodo,int x){
+public void AddAfter(NodoMeta Nodo,String x){
     NodoMeta FindNodo =head;
     NodoMeta FindNext,FindPrevious;
     Boolean match=false;

@@ -5,19 +5,40 @@
  */
 package UI;
 
+import Data.*;
+
 /**
  *
  * @author ANDRES
  */
 public class LogIn extends javax.swing.JFrame {
-
+    MapH Users = new MapH();
+    
+    
     /**
      * Creates new form LogIn
      */
     public LogIn() {
+        try {
+            ConexionBD.conectar();
+        } catch (Exception e) {
+        }
         initComponents();
+        inicio();
         
         this.setLocationRelativeTo(null);
+    }
+
+    
+    
+ 
+    private  void inicio() {
+    
+    try {
+        Users = ConexionBD.getUsers();
+        } catch (Exception e) {}
+    
+    
     }
 
     /**
@@ -38,6 +59,8 @@ public class LogIn extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         panel1 = new java.awt.Panel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -98,10 +121,27 @@ public class LogIn extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(1, 1, 1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 180, 50));
 
-        jLabel4.setFont(new java.awt.Font("Decker", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Decker", 1, 20)); // NOI18N
         jLabel4.setText("Log In");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 210, 77));
         jLabel4.getAccessibleContext().setAccessibleName("jPanel1");
+
+        jLabel5.setFont(new java.awt.Font("Decker", 0, 10)); // NOI18N
+        jLabel5.setText("¿No tienes una cuenta?");
+        jLabel5.setToolTipText("");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, -1));
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Decker", 1, 10)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(53, 172, 67));
+        jButton2.setText("Regístrate");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 320));
 
@@ -123,21 +163,29 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String user,pass;
+    String user,pass,passW;
     user=jTextField1.getText();
     pass=jPasswordField1.getText();
+    NodoUser userLog = Users.get(user);
+    passW=userLog.getValue();
     
-    
-    
-    if (("Usuario1".equals(user))&&("password".equals(pass))){
-    new Home().setVisible(rootPaneCheckingEnabled);
+    if (pass.equals(passW)){
+    new Home(userLog).setVisible(rootPaneCheckingEnabled);
+        
     dispose();}
+    
     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    new SignIn().setVisible(rootPaneCheckingEnabled);
+        
+    dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,10 +224,12 @@ public class LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;

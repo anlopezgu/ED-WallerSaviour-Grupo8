@@ -15,7 +15,7 @@ import static java.awt.image.ImageObserver.WIDTH;
  */
 public class Logic {
     
-    public static ListaMetas Metas(){
+    /*public static ListaMetas Metas(){
         NodoMeta M1 = new NodoMeta(50000,"Casa nueva");
         NodoMeta M2 = new NodoMeta(12000,"Xbox Series X");
         NodoMeta M3 = new NodoMeta(5000,"Carro nuevo");

@@ -27,6 +27,8 @@ import java.util.concurrent.ExecutionException;
 public class ConexionBD {
     public static Firestore bd;
     public static MinHeap Movimientos = new MinHeap(100);
+    public static MapH User = new MapH();
+    public static ListaMetas Metas = new ListaMetas();
     
     public static void conectar() throws IOException{
 
@@ -42,10 +44,10 @@ public class ConexionBD {
         bd = FirestoreClient.getFirestore();
         
 }
-        public static boolean insertarDatos(String coleccion,String ID,NodoDinero nodo){
+        public static boolean insertarDatos(String user,String coleccion,String ID,NodoDinero nodo){
             
             try {
-            DocumentReference docref = bd.collection(coleccion).document(ID);
+            DocumentReference docref = bd.collection("users").document(user).collection(coleccion).document(ID);
             ApiFuture<WriteResult> result = docref.set(nodo);
             System.out.println("Udate time : "+ result.get().getUpdateTime());
             return true;
@@ -53,10 +55,48 @@ public class ConexionBD {
             }
             return false;
         }
+        public static boolean nuevaMeta(String user,String coleccion,String ID,NodoMeta nodo){
+            
+            try {
+            DocumentReference docref = bd.collection("users").document(user).collection(coleccion).document(ID);
+            ApiFuture<WriteResult> result = docref.set(nodo);
+            System.out.println("Udate time : "+ result.get().getUpdateTime());
+            return true;
+            }catch (Exception e){
+            }
+            return false;
+        }
+        public static boolean eliminarMeta(String user,String coleccion,String ID){
+            
+            try {
+            DocumentReference docref = bd.collection("users").document(user).collection(coleccion).document(ID);
+            ApiFuture<WriteResult> result = docref.delete();
+            System.out.println("Udate ttime : "+ result.get().getUpdateTime());
+            return true;
+            }catch (Exception e){
+            }
+            return false;
+        }
+        public static boolean nuevoUsuario(String ID,NodoUser nodo){
+            
+            try {
+            DocumentReference docref = bd.collection("users").document(ID);
+            ApiFuture<WriteResult> result = docref.set(nodo);
+            for(int i = 0;i<3;i++){
+                String uuid = java.util.UUID.randomUUID().toString();
+                NodoDinero newN = new NodoDinero("0", "registro", "1/11/1111");
+                insertarDatos(ID, "movimientos",uuid ,newN );
+            }
+            System.out.println("Udate time : "+ result.get().getUpdateTime());
+            return true;
+            }catch (Exception e){
+            }
+            return false;
+        }
         
-        public static MinHeap getData() throws InterruptedException, ExecutionException{
+        public static MinHeap getData(String user) throws InterruptedException, ExecutionException{
             //asynchronously retrieve all documents
-            ApiFuture<QuerySnapshot> future = bd.collection("movimientos").get();
+            ApiFuture<QuerySnapshot> future = bd.collection("users").document(user).collection("movimientos").get();
 // future.get() blocks on response
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
             for (QueryDocumentSnapshot document : documents) {
@@ -65,6 +105,30 @@ public class ConexionBD {
                 
             }
         return Movimientos;
+        }
+        public static ListaMetas getMetas(String user) throws InterruptedException, ExecutionException{
+            //asynchronously retrieve all documents
+            ApiFuture<QuerySnapshot> future = bd.collection("users").document(user).collection("metas").get();
+// future.get() blocks on response
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                NodoMeta NodoIn = new NodoMeta(document.getString("amount"), document.getString("name"));
+                Metas.PushFront(NodoIn);
+                
+            }
+        return Metas;
+        }
+        public static MapH getUsers() throws InterruptedException, ExecutionException{
+            //asynchronously retrieve all documents
+            ApiFuture<QuerySnapshot> future = bd.collection("users").get();
+// future.get() blocks on response
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                User.add(document.getId(), document.getString("value"),document.getString("name"),document.getString("lastname"),document.getString("address"));
+                
+                
+            }
+        return User;
         }
         /*
         public static Pila getIngresos() throws InterruptedException, ExecutionException{
